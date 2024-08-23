@@ -1,0 +1,26 @@
+{% load static %} {% load static_manifest %} {% csrf_token %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="Team Events App"
+      content="Web site that suggests team event places"
+    />
+    <title>Team Events</title>
+
+    <script>
+      window.CSRF_TOKEN = '{{ csrf_token }}';
+      window.DOMAIN = '{{ DOMAIN }}';
+    </script>
+
+    <script defer="defer" src="{% get_manifest_file 'main.js' %}"></script>
+    <link href="{% get_manifest_file 'main.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
