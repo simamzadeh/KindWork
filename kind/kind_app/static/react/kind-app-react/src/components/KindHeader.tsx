@@ -1,16 +1,15 @@
-import React from 'react';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
 
 const Header: React.FC = () => {
     return (
-        <header className="header">
-            <h1>Be Kind</h1>
-            <nav>
-                <ul>
-                    <li><a href="#gratitude">Gratitude</a></li>
-                    <li><a href="#kindness">Acts of Kindness</a></li>
-                </ul>
-            </nav>
-        </header>
+        <Box sx={{ width: '100%', maxWidth: 600 }}>
+            <Typography variant="h2" gutterBottom>
+                Welcome to Kind.
+            </Typography>
+        </Box>
     );
 }
 

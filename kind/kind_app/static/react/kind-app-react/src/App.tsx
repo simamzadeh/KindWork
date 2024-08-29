@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import './App.css';
+import { Box } from '@mui/material';
 import KindHeader from './components/KindHeader';
+import TopNavBar from './components/TopNavBar';
+import Container from '@mui/material/Container';
+
+const theme = createTheme({
+  palette: {
+    background: {
+      default: '#d2d2c0', // Light sage green color
+    },
+  },
+});
 
 function App() {
   return (
     <div className="App">
-      <KindHeader />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+        <TopNavBar />
+        <Box></Box>
+        <Container maxWidth="sm">
+          <KindHeader />
+        </Container>
+      </ThemeProvider>
     </div>
   );
 }
