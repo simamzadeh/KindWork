@@ -18,7 +18,7 @@ import environ
 environ.Env.read_env()
 DOMAIN = os.environ.get("DOMAIN", "http://localhost:8000") # where app runs locally
 # SECRET_KEY = os.environ.get("SECRET_KEY")
-SECRET_KEY = 'django-insecure-=r2o&=hhp5%m3m5o6%tfsibh$@@md(!a8d$#-ddn6+^$j-0-#+'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", "False") == "True"
 SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", "False") == "True"
@@ -36,21 +36,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'kind_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'kind_app',
     "rest_framework",
     "corsheaders", # for making calls from backend to frontend
 ]
