@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Divider } from '@mui/material';
 
 export default function TopNavBar() {
   return (
@@ -21,7 +22,11 @@ export default function TopNavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Button color="inherit">Login</Button>
+          <Button color='inherit'>Gratitude Entries</Button>
+          <Divider orientation='vertical' variant="middle" flexItem />
+          <Button color='inherit'>Mood Log</Button>
+          <Divider orientation='vertical' variant="middle" flexItem />
+          <Button color='inherit' >Login</Button>
         </Toolbar>
       </AppBar>
     </Box>
