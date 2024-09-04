@@ -6,6 +6,7 @@ import TopNavBar from './components/TopNavBar';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import GratitudeEntryBox from './components/GratitudeEntryBox';
+import { AuthProvider } from './context/AuthContext';
 
 const theme = createTheme({
   palette: {
@@ -18,6 +19,7 @@ const theme = createTheme({
 function App() {
   return (
     <div className="App">
+      <AuthProvider>
       <ThemeProvider theme={theme}>
       <CssBaseline />
       <TopNavBar />
@@ -28,6 +30,7 @@ function App() {
         </Container>
       </Stack>
       </ThemeProvider>
+      </AuthProvider>
     </div>
   );
 }

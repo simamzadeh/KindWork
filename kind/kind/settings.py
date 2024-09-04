@@ -98,7 +98,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 "django.template.context_processors.csrf",
                 # Add env variables to context
-                "kind_app.views.global_settings",
+                "kind_app.views.utils.global_settings",
             ],
         },
     },
