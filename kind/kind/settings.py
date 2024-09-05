@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "rest_framework",
     "corsheaders", # for making calls from backend to frontend
+    "crispy_forms",
+    'crispy_bootstrap4',
+
 ]
 
 MIDDLEWARE = [
@@ -84,6 +87,10 @@ CSRF_COOKIE_SAMESITE = (
 SESSION_COOKIE_SAMESITE = (
     "Lax"  # or 'Strict' if your frontend and backend are on the same domain
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+STATIC_URL = '/static/'
 
 TEMPLATES = [
     {
