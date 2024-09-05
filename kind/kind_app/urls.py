@@ -2,8 +2,7 @@ from django.urls import path
 from django.urls import path
 from kind_app.views.gratitude_entry import GratitudeEntryView
 from kind_app.views.utils import index
-from django.contrib.auth import views as auth_views
-from django.urls import path, include
+from django.urls import path
 from kind_app.views.register import sign_up
 from kind_app.views.login import login_request
 
