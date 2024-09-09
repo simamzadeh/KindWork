@@ -12,5 +12,5 @@ class GratitudeEntry(models.Model):
         verbose_name = "Gratitude Entry"
         verbose_name_plural = "Gratitude Entries"
 
-    def __str__(self):
-        return f"{self.title} - {self.user.username} ({self.date})"
+    # def __str__(self):
+    #     return f"{self.title} - {self.user.username} ({self.date})"

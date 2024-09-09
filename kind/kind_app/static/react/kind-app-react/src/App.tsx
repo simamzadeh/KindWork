@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import GratitudeEntryBox from './components/GratitudeEntryBox';
 import { AuthProvider } from './context/AuthContext';
+import GratitudeEntriesTest from './components/test_component';
 
 const theme = createTheme({
   palette: {
@@ -27,6 +28,7 @@ function App() {
         <Container maxWidth="sm">
           <KindHeader />
           <GratitudeEntryBox />
+          <GratitudeEntriesTest />
         </Container>
       </Stack>
       </ThemeProvider>
