@@ -7,9 +7,9 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import GratitudeEntryBox from './components/GratitudeEntryBox';
 import { AuthProvider } from './context/AuthContext';
-import GratitudeEntriesTest from './components/test_component';
 import QuestionButtonCard from './components/QuestionButtonCard'
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import GratitudeList from './pages/GratitudeEntryPage';
 
 const theme = createTheme({
   palette: {
@@ -25,15 +25,18 @@ function App() {
       <AuthProvider>
       <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
+      <Router>
         <TopNavBar />
-      </BrowserRouter>
+      </Router>
       <Stack direction="row" spacing={1} sx={{justifyContent: "center"}}>
         <Container maxWidth="sm">
           <KindHeader />
           <QuestionButtonCard />
           {/* <GratitudeEntryBox /> */}
-          <GratitudeEntriesTest />
+          <Routes>
+            <Route path="gratitude/" element={<GratitudeList />} />
+          </Routes>
+          <GratitudeList />
         </Container>
       </Stack>
       </ThemeProvider>
