@@ -1,17 +1,16 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Divider } from '@mui/material';
+import { Divider } from '@mui/material'; 
 
 export default function TopNavBar() {
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: '#9CBA9B' }}>
+      <AppBar position="static" sx={{ backgroundColor: '#b1debb' }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -26,7 +25,8 @@ export default function TopNavBar() {
           <Divider orientation='vertical' variant="middle" flexItem />
           <Button color='inherit'>Mood Log</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
-          <Button color='inherit' >Login</Button>
+          <Box sx={{ flexGrow: 1 }} />
+          <Button color='inherit' href={"login/"}>Login</Button>
         </Toolbar>
       </AppBar>
     </Box>

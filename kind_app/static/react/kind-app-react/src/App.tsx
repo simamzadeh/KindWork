@@ -9,6 +9,7 @@ import GratitudeEntryBox from './components/GratitudeEntryBox';
 import { AuthProvider } from './context/AuthContext';
 import GratitudeEntriesTest from './components/test_component';
 import QuestionButtonCard from './components/QuestionButtonCard'
+import { BrowserRouter } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -24,12 +25,14 @@ function App() {
       <AuthProvider>
       <ThemeProvider theme={theme}>
       <CssBaseline />
-      <TopNavBar />
+      <BrowserRouter>
+        <TopNavBar />
+      </BrowserRouter>
       <Stack direction="row" spacing={1} sx={{justifyContent: "center"}}>
         <Container maxWidth="sm">
           <KindHeader />
           <QuestionButtonCard />
-          <GratitudeEntryBox />
+          {/* <GratitudeEntryBox /> */}
           <GratitudeEntriesTest />
         </Container>
       </Stack>

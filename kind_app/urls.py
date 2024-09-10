@@ -10,6 +10,5 @@ urlpatterns = [
     path("", index, name="index"),
     path("register/", sign_up, name="register"),
     path("login/", login_request, name="login"),
-    path("gratitude-entries/", name="gratitude-entries"),
     path('api/gratitude/', GratitudeEntryView.as_view(), name='gratitude-api'),
 ]
