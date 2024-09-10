@@ -8,11 +8,12 @@ import Stack from '@mui/material/Stack';
 import GratitudeEntryBox from './components/GratitudeEntryBox';
 import { AuthProvider } from './context/AuthContext';
 import GratitudeEntriesTest from './components/test_component';
+import QuestionButtonCard from './components/QuestionButtonCard'
 
 const theme = createTheme({
   palette: {
     background: {
-      default: '##F5F5DC',
+      default: '#f2f5f3',
     },
   },
 });
@@ -27,6 +28,7 @@ function App() {
       <Stack direction="row" spacing={1} sx={{justifyContent: "center"}}>
         <Container maxWidth="sm">
           <KindHeader />
+          <QuestionButtonCard />
           <GratitudeEntryBox />
           <GratitudeEntriesTest />
         </Container>
