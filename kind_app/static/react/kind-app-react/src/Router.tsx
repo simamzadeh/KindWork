@@ -2,12 +2,13 @@ import { Home } from '@mui/icons-material';
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import GratitudeEntryPage from './pages/GratitudeEntryPage';
+import HomePage from './pages/HomePage';
 
 const Router = createBrowserRouter([
-    // {
-    //     path: "/",
-    //     element: <Home />
-    // },
+    {
+        path: "/",
+        element: <HomePage />
+    },
     // {
     //     path: "login/",
     //     element <Login />

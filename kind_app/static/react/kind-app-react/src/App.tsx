@@ -60,16 +60,16 @@ function App() {
     <div className="App">
       <AuthProvider>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
+          {/* <CssBaseline /> */}
           <TopNavBar />
-          <Stack direction="row" spacing={1} sx={{ justifyContent: "center" }}>
-            <Container maxWidth="sm">
-              <KindHeader />
-              <QuestionButtonCard />
+          {/* <Stack direction="row" spacing={1} sx={{ justifyContent: "center" }}> */}
+            {/* <Container maxWidth="sm"> */}
+              {/* <KindHeader /> */}
+              {/* <QuestionButtonCard /> */}
               {/* The GratitudeEntryTable is kept outside the routes */}
-              <GratitudeEntryTable />
-            </Container>
-          </Stack>
+              {/* <GratitudeEntryTable /> */}
+            {/* </Container> */}
+          {/* </Stack> */}
           {/* Provide the router using RouterProvider */}
           <RouterProvider router={Router} />
         </ThemeProvider>
