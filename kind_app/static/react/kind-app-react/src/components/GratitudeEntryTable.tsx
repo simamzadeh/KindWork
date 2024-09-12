@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Box,
   Container,
+  Checkbox,
   Typography,
   CircularProgress,
   Table,
@@ -28,6 +29,7 @@ const GratitudeEntryTable: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState<boolean>(false);
+  const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -78,6 +80,24 @@ const GratitudeEntryTable: React.FC = () => {
     }
   };
 
+  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      setSelectedIds(new Set(entries.map((entry) => entry.id)));
+    } else {
+      setSelectedIds(new Set());
+    }
+  };
+
+  const handleRowClick = (id: number) => {
+    const newSelectedIds = new Set(selectedIds);
+    if (newSelectedIds.has(id)) {
+      newSelectedIds.delete(id);
+    } else {
+      newSelectedIds.add(id);
+    }
+    setSelectedIds(newSelectedIds);
+  };
+
   if (loading) {
     return (
       <Container>
@@ -111,6 +131,12 @@ const GratitudeEntryTable: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell padding="checkbox">
+                <Checkbox
+                  checked={entries.length > 0 && selectedIds.size === entries.length}
+                  onChange={handleSelectAllClick}
+                />
+              </TableCell>
               <TableCell>ID</TableCell>
               <TableCell>Content</TableCell>
               <TableCell>Created At</TableCell>
@@ -118,7 +144,18 @@ const GratitudeEntryTable: React.FC = () => {
           </TableHead>
           <TableBody>
             {entries.map((entry) => (
-              <TableRow key={entry.id}>
+              <TableRow 
+                key={entry.id}
+                hover
+                onClick={() => handleRowClick(entry.id)}
+                selected={selectedIds.has(entry.id)}
+              >
+                <TableCell padding="checkbox">
+                  <Checkbox
+                    checked={selectedIds.has(entry.id)}
+                    onChange={() => handleRowClick(entry.id)}
+                  />
+                </TableCell>
                 <TableCell>{entry.id}</TableCell>
                 <TableCell>{entry.content}</TableCell>
                 <TableCell>
