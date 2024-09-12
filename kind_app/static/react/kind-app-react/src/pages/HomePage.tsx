@@ -1,9 +1,5 @@
 import React from 'react';
-import CardComponent from '../components/QuestionCard';
-import ButtonComponent from '../components/LogButton';
-import { Container, Box } from '@mui/material';
-import QuestionCard from '../components/QuestionCard';
-import LogButton from '../components/LogButton';
+import { Container } from '@mui/material';
 import QuestionLogCard from '../components/QuestionLogCard';
 
 const HomePage: React.FC = () => {
