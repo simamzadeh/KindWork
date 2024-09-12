@@ -21,7 +21,7 @@ export default function TopNavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Button color='inherit'>Gratitude</Button>
+          <Button color='inherit' href={"gratitude/"}>Gratitude</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
           <Button color='inherit'>Mood Log</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
