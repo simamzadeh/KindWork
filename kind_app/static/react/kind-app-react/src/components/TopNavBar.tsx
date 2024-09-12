@@ -29,6 +29,7 @@ export default function TopNavBar() {
           <Button color='inherit'>Mood Log</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
 
+
           <Box 
             sx={{
               position: 'absolute',
@@ -44,6 +45,7 @@ export default function TopNavBar() {
             </Typography>
           </Box>
 
+          <Box sx={{ flexGrow: 1 }} />
           <Button color='inherit' href={"login/"}>Login</Button>
         </Toolbar>
       </AppBar>
