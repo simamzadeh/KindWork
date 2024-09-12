@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Box,
   Container,
   Typography,
   CircularProgress,
@@ -11,6 +12,9 @@ import {
   TableRow,
   Paper,
 } from '@mui/material';
+import AddButton from './AddButton';
+import GratitudeEntryForm from './GratitudeEntryForm';
+import { useAuth } from '../context/AuthContext';
 
 interface GratitudeEntry {
   id: number;
@@ -19,9 +23,11 @@ interface GratitudeEntry {
 }
 
 const GratitudeEntryTable: React.FC = () => {
+  const { csrfToken } = useAuth(); // Use the CSRF token from context
   const [entries, setEntries] = useState<GratitudeEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -42,6 +48,36 @@ const GratitudeEntryTable: React.FC = () => {
     fetchEntries();
   }, []);
 
+  const handleAddClick = () => {
+    setShowForm(true);
+  };
+
+  const handleFormClose = () => {
+    setShowForm(false);
+  };
+
+  const handleFormSubmit = async (content: string) => {
+    try {
+      const response = await fetch('/api/gratitude/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken || '', // Use CSRF token from context
+        },
+        body: JSON.stringify({ content }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add entry');
+      }
+
+      const newEntry = await response.json();
+      setEntries((prevEntries) => [...prevEntries, newEntry]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (loading) {
     return (
       <Container>
@@ -61,9 +97,16 @@ const GratitudeEntryTable: React.FC = () => {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        Gratitude Entries
-      </Typography>
+      <Box mb={2} display="flex" alignItems="center" justifyContent="space-between">
+        <Typography variant="h4" gutterBottom>
+          Gratitude Entries
+        </Typography>
+        <Box>
+            <AddButton onClick={handleAddClick} />
+        </Box>
+      </Box>
+      
+      
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -86,6 +129,11 @@ const GratitudeEntryTable: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <GratitudeEntryForm
+        open={showForm}
+        onClose={handleFormClose}
+        onSubmit={handleFormSubmit}
+      />
     </Container>
   );
 };
