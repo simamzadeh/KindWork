@@ -14,6 +14,7 @@ import {
   Paper,
 } from '@mui/material';
 import AddButton from './AddButton';
+import ActionButton from './ActionButton';
 import GratitudeEntryForm from './GratitudeEntryForm';
 import { useAuth } from '../context/AuthContext';
 
@@ -30,6 +31,7 @@ const GratitudeEntryTable: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
+  const [editingEntry, setEditingEntry] = useState<GratitudeEntry | null>(null); // To track which entry is being edited
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -60,23 +62,91 @@ const GratitudeEntryTable: React.FC = () => {
 
   const handleFormSubmit = async (content: string) => {
     try {
-      const response = await fetch('/api/gratitude/', {
-        method: 'POST',
+      if (editingEntry) {
+        // Update existing entry (Edit case)
+        const response = await fetch(`/api/gratitude/`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken || '',
+          },
+          body: JSON.stringify({ 
+            id: editingEntry.id,
+            content 
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to update entry');
+        }
+
+        const updatedEntry = await response.json();
+        setEntries((prevEntries) =>
+          prevEntries.map((entry) =>
+            entry.id === updatedEntry.id ? updatedEntry : entry
+          )
+        );
+      } else {
+        // Add new entry (Add case)
+        const response = await fetch('/api/gratitude/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken || '',
+          },
+          body: JSON.stringify({ content }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to add entry');
+        }
+
+        const newEntry = await response.json();
+        setEntries((prevEntries) => [...prevEntries, newEntry]);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    handleFormClose();
+  };
+
+  const handleDeleteEntry = async (id: number) => {
+    try {
+      const response = await fetch(`/api/gratitude/`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken || '', // Use CSRF token from context
+          'X-CSRFToken': csrfToken || '',
         },
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({
+          ids: Array.from(selectedIds),  // Send selectedIds as an array
+        }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to add entry');
+        throw new Error('Failed to delete entry');
       }
 
-      const newEntry = await response.json();
-      setEntries((prevEntries) => [...prevEntries, newEntry]);
+      setEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== id));
     } catch (err) {
       console.error(err);
+    }
+    setSelectedIds(new Set()); // Clear selection after delete
+  };
+
+  const handleEditAction = () => {
+    const selectedEntry = entries.find((entry) => selectedIds.has(entry.id));
+    if (selectedEntry) {
+      setEditingEntry(selectedEntry); // Set the selected entry for editing
+      setShowForm(true); // Open the form
+    }
+  };
+
+  const handleDeleteAction = () => {
+    const selectedEntry = entries.find((entry) => selectedIds.has(entry.id));
+    if (selectedEntry) {
+      handleDeleteEntry(selectedEntry.id);
     }
   };
 
@@ -123,6 +193,12 @@ const GratitudeEntryTable: React.FC = () => {
         </Typography>
         <Box>
             <AddButton onClick={handleAddClick} />
+            <ActionButton
+              onEdit={handleEditAction}
+              onDelete={handleDeleteAction}
+              disableEdit={selectedIds.size !== 1}    // Disable Edit if not exactly one item is selected
+              disableDelete={selectedIds.size === 0}  // Disable actions if no items are selected
+            />
         </Box>
       </Box>
       

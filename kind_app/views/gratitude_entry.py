@@ -33,15 +33,17 @@ class GratitudeEntryView(APIView):
             return Response(GratitudeEntrySerializer(entry).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, pk):
-        entry = get_object_or_404(GratitudeEntry, pk=pk)
+    def put(self, request):
+        entry_id = request.data.get('id', None)
+        entry = get_object_or_404(GratitudeEntry, pk=entry_id)
         serializer = GratitudeEntrySerializer(entry, data=request.data, partial=True)
         if serializer.is_valid():
             entry = serializer.save(user=request.user)
             return Response(GratitudeEntrySerializer(entry).data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
-        entry = get_object_or_404(GratitudeEntry, pk=pk)
-        entry.delete()
+    def delete(self, request):
+        ids = request.data.get('ids', None)
+        entries = GratitudeEntry.objects.filter(id__in=ids)
+        entries.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
