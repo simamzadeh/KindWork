@@ -28,6 +28,8 @@ export default function TopNavBar() {
           <Divider orientation='vertical' variant="middle" flexItem />
           <Button color='inherit'>Mood Log</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
+          <Button color='inherit' href={"kind-acts/"}>Kind Acts</Button>
+          <Divider orientation='vertical' variant="middle" flexItem />
 
 
           <Box 

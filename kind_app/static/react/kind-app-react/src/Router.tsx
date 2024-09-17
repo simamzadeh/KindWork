@@ -3,6 +3,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import GratitudeEntryPage from './pages/GratitudeEntryPage';
 import HomePage from './pages/HomePage';
+import KindActPage from './pages/KindActPage';
 
 const Router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const Router = createBrowserRouter([
     {
         path: "gratitude/",
         element:<GratitudeEntryPage />
+    },
+    {
+        path: "kind-acts/",
+        element:<KindActPage />
     }
 ]);
 
