@@ -31,4 +31,4 @@ class MoodLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = MoodLog
         fields = ['id', 'user', 'mood', 'created_at']
-        read_only_fields = ['id', 'user', 'mood', 'created_at']
+        read_only_fields = ['id', 'user', 'created_at']

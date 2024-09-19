@@ -4,6 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import GratitudeEntryPage from './pages/GratitudeEntryPage';
 import HomePage from './pages/HomePage';
 import KindActPage from './pages/KindActPage';
+import MoodLogPage from './pages/MoodLogPage';
 
 const Router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const Router = createBrowserRouter([
     {
         path: "kind-acts/",
         element:<KindActPage />
+    },
+    {
+        path: "mood-log/",
+        element:<MoodLogPage />
     }
 ]);
 
