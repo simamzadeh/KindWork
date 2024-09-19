@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from kind_app.models.gratitude_entry import GratitudeEntry
 from kind_app.models.kind_act import KindAct
+from kind_app.models.mood_log import MoodLog
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,3 +24,11 @@ class KindActSerializer(serializers.ModelSerializer):
         model = KindAct
         fields = ['id', 'user', 'content', 'created_at', 'updated_at']
         read_only_fields = ['id', 'user', 'created_at', 'updated_at']
+
+class MoodLogSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)  # Include username in the response
+
+    class Meta:
+        model = MoodLog
+        fields = ['id', 'user', 'mood', 'created_at']
+        read_only_fields = ['id', 'user', 'mood', 'created_at']
