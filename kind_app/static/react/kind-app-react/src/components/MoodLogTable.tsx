@@ -200,8 +200,9 @@ const MoodLogTable: React.FC = () => {
         <Typography variant="h4" gutterBottom>
           Mood Log
         </Typography>
-        <Box>
+        <Box display="flex" alignItems="center">
             <AddButton onClick={handleAddClick} />
+            <Box mx={1} />
             <ActionButton
               onEdit={handleEditAction}
               onDelete={handleDeleteAction}

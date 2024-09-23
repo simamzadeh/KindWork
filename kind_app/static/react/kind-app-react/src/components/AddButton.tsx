@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fab } from '@mui/material';
+import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 interface AddButtonProps {
@@ -8,13 +8,14 @@ interface AddButtonProps {
 
 const AddButton: React.FC<AddButtonProps> = ({ onClick }) => {
   return (
-    <Fab
+    <Button
+      variant="contained"
       color="primary"
-      aria-label="add"
+      startIcon={<AddIcon />} // Add the icon as a start icon
       onClick={onClick}
     >
-      <AddIcon />
-    </Fab>
+      New Entry
+    </Button>
   );
 };
 

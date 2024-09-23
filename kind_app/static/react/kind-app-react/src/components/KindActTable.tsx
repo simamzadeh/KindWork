@@ -191,8 +191,9 @@ const KindActTable: React.FC = () => {
         <Typography variant="h4" gutterBottom>
           Acts of Kindness
         </Typography>
-        <Box>
+        <Box display="flex" alignItems="center">
             <AddButton onClick={handleAddClick} />
+            <Box mx={1} />
             <ActionButton
               onEdit={handleEditAction}
               onDelete={handleDeleteAction}

@@ -191,8 +191,9 @@ const GratitudeEntryTable: React.FC = () => {
         <Typography variant="h4" gutterBottom>
           Gratitude Entries
         </Typography>
-        <Box>
+        <Box display="flex" alignItems="center">
             <AddButton onClick={handleAddClick} />
+            <Box mx={1} />
             <ActionButton
               onEdit={handleEditAction}
               onDelete={handleDeleteAction}
