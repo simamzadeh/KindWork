@@ -7,9 +7,28 @@ import {
   IconButton,
   Divider,
   Typography
-} from "@mui/material"
+} from "@mui/material";
+import { useState, useEffect } from "react";
 
 export default function TopNavBar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState<string | null>(null); // State for username
+
+  // Fetch authentication status and username from Django
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        const response = await fetch("/api/check-auth/");
+        const data = await response.json();
+        setIsLoggedIn(data.isAuthenticated);
+        setUsername(data.username || null); // Set the username if authenticated (and null if undefined)
+      } catch (error) {
+        console.error("Error checking authentication status", error);
+      }
+    };
+
+    checkAuthStatus();
+  }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -24,15 +43,15 @@ export default function TopNavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Button color='inherit' href={"gratitude/"}>Gratitude</Button>
+
+          <Button color='inherit' href={"/gratitude/"}>Gratitude</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
-          <Button color='inherit' href={"mood-log/"}>Mood Log</Button>
+          <Button color='inherit' href={"/mood-log/"}>Mood Log</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
-          <Button color='inherit' href={"kind-acts/"}>Kind Acts</Button>
+          <Button color='inherit' href={"/kind-acts/"}>Kind Acts</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
 
-
-          <Box 
+          <Box
             sx={{
               position: 'absolute',
               left: '50%',
@@ -43,12 +62,18 @@ export default function TopNavBar() {
             }}
           >
             <Typography variant="h6" sx={{ color: 'inherit' }}>
-              Welcome to Kind
+              {isLoggedIn ? `Welcome to Kind, ${username}` : 'Welcome to Kind'}
             </Typography>
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Button color='inherit' href={"login/"}>Login</Button>
+
+          {/* Conditionally render the Login or Logout button */}
+          {isLoggedIn ? (
+            <Button color="inherit" href="/logout/">Logout</Button>
+          ) : (
+            <Button color="inherit" href="/login/">Login</Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

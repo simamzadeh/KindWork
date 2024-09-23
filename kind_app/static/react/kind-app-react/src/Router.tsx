@@ -6,19 +6,12 @@ import HomePage from './pages/HomePage';
 import KindActPage from './pages/KindActPage';
 import MoodLogPage from './pages/MoodLogPage';
 
+// Login, logout and registration pages are not included in the Router as they use Bootstrap instead
 const Router = createBrowserRouter([
     {
         path: "/",
         element: <HomePage />
     },
-    // {
-    //     path: "login/",
-    //     element <Login />
-    // }
-    // {
-    //     path: "register/",
-    //     element: <Registration />
-    // }
     {
         path: "gratitude/",
         element:<GratitudeEntryPage />
