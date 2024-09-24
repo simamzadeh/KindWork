@@ -10,7 +10,7 @@ import MoodLogPage from './pages/MoodLogPage';
 const Router = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage />
+        element: <GratitudeEntryPage />
     },
     {
         path: "gratitude/",
