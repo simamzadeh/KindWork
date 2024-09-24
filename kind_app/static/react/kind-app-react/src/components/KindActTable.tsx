@@ -38,7 +38,7 @@ const KindActTable: React.FC = () => {
       try {
         const response = await fetch('/api/kind-acts/');
         if (!response.ok) {
-          throw new Error('Failed to fetch entries');
+          throw new Error('Failed to fetch entries. You are not logged in. Please log in to make changes!');
         }
         const data = await response.json();
         setEntries(data); // Set the fetched entries in the state
