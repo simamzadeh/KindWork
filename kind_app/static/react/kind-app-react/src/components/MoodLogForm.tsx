@@ -10,9 +10,9 @@ interface MoodLogFormProps {
 // Define the mood labels
 const moodMarks = [
   { value: 0, label: 'Very Unpleasant' },
-  { value: 25, label: 'Unpleasant' },
+  { value: 30, label: 'Unpleasant' },
   { value: 50, label: 'Neutral' },
-  { value: 75, label: 'Pleasant' },
+  { value: 70, label: 'Pleasant' },
   { value: 100, label: 'Very Pleasant' },
 ];
 
@@ -70,6 +70,14 @@ const MoodLogForm: React.FC<MoodLogFormProps> = ({ open, onClose, onSubmit }) =>
                 },
                 '& .MuiSlider-mark': {
                   transform: 'translateX(-50%)',  // Adjust positioning of the marks
+                },
+                '& .MuiSlider-markLabel[data-index="0"]': {  // First label (Very Unpleasant)
+                  transform: 'translateX(0%)',  // Ensure it's fully visible
+                  marginLeft: '-12px',  // Add some left margin to make space
+                },
+                '& .MuiSlider-markLabel[data-index="4"]': {  // Last label (Very Pleasant)
+                  transform: 'translateX(-100%)',  // Ensure it's fully visible
+                  marginRight: '-12px',  // Add some right margin to make space
                 },
               }}
           />
