@@ -78,4 +78,6 @@ and
 
 `git push`
 
-Render automatically register new git commits and starts deploying them immediately.
+Render automatically registers new git commits and starts deploying them immediately.
+
+Live URL here: https://kindapp.onrender.com/ 
