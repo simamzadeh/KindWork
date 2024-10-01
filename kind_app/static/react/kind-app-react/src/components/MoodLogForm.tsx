@@ -10,9 +10,9 @@ interface MoodLogFormProps {
 // Define the mood labels
 const moodMarks = [
   { value: 0, label: 'Very Unpleasant' },
-  { value: 30, label: 'Unpleasant' },
+  { value: 25, label: 'Unpleasant' },
   { value: 50, label: 'Neutral' },
-  { value: 70, label: 'Pleasant' },
+  { value: 75, label: 'Pleasant' },
   { value: 100, label: 'Very Pleasant' },
 ];
 
