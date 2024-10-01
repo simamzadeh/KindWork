@@ -214,7 +214,6 @@ const GratitudeEntryTable: React.FC = () => {
                   onChange={handleSelectAllClick}
                 />
               </TableCell>
-              <TableCell>ID</TableCell>
               <TableCell>Content</TableCell>
               <TableCell>Created At</TableCell>
             </TableRow>
@@ -233,7 +232,6 @@ const GratitudeEntryTable: React.FC = () => {
                     onChange={() => handleRowClick(entry.id)}
                   />
                 </TableCell>
-                <TableCell>{entry.id}</TableCell>
                 <TableCell>{entry.content}</TableCell>
                 <TableCell>
                   {new Date(entry.created_at).toLocaleString()}

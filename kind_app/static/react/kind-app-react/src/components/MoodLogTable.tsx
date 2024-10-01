@@ -223,7 +223,6 @@ const MoodLogTable: React.FC = () => {
                   onChange={handleSelectAllClick}
                 />
               </TableCell>
-              <TableCell>ID</TableCell>
               <TableCell>Mood</TableCell>
               <TableCell>Created At</TableCell>
             </TableRow>
@@ -242,7 +241,6 @@ const MoodLogTable: React.FC = () => {
                     onChange={() => handleRowClick(entry.id)}
                   />
                 </TableCell>
-                <TableCell>{entry.id}</TableCell>
                 <TableCell>{moodLabelMap[entry.mood] || entry.mood}</TableCell>
                 <TableCell>
                   {new Date(entry.created_at).toLocaleString()}
