@@ -25,7 +25,7 @@ SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", "False") == "Tru
 SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", "False") == "True"
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(",")
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "kindapp.onrender.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "kindapp.onrender.com", "kindwork.onrender.com"]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
