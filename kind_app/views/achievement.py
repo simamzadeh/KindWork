@@ -4,20 +4,20 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
-from kind_app.models.kind_act import KindAct
-from kind_app.serializers import KindActSerializer
+from kind_app.models.achievement import Achievement
+from kind_app.serializers import AchievementSerializer
 
-class KindActView(APIView):
+class AchievementView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, pk=None):
         # If a specific entry is requested
         if pk:
-            entry = get_object_or_404(KindAct, pk=pk)
+            entry = get_object_or_404(Achievement, pk=pk)
 
             # Check if the user is the owner of the entry or an admin
             if request.user.is_superuser or entry.user == request.user:
-                serializer = KindActSerializer(entry)
+                serializer = AchievementSerializer(entry)
                 return Response(serializer.data)
             else:
                 return Response({"detail": "You do not have permission to view this entry."}, status=status.HTTP_403_FORBIDDEN)
@@ -25,12 +25,12 @@ class KindActView(APIView):
         # If all entries are requested
         if request.user.is_superuser:
             # Admin can see all entries
-            entries = KindAct.objects.all()
+            entries = Achievement.objects.all()
         else:
             # Regular users can only see their own entries
-            entries = KindAct.objects.filter(user=request.user)
+            entries = Achievement.objects.filter(user=request.user)
         
-        serializer = KindActSerializer(entries, many=True)
+        serializer = AchievementSerializer(entries, many=True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -38,29 +38,29 @@ class KindActView(APIView):
         data = request.data.copy()  # Make a mutable copy of the request data
         data['user'] = request.user.id  # Set the user field to the currently authenticated user
 
-        serializer = KindActSerializer(data=data)
+        serializer = AchievementSerializer(data=data)
         if serializer.is_valid():
             entry = serializer.save(user=request.user)
-            return Response(KindActSerializer(entry).data, status=status.HTTP_201_CREATED)
+            return Response(AchievementSerializer(entry).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
         entry_id = request.data.get('id', None)
-        entry = get_object_or_404(KindAct, pk=entry_id)
+        entry = get_object_or_404(Achievement, pk=entry_id)
 
         # Check if the user is the owner of the entry or an admin
         if request.user.is_superuser or entry.user == request.user:
-            serializer = KindActSerializer(entry, data=request.data, partial=True)
+            serializer = AchievementSerializer(entry, data=request.data, partial=True)
             if serializer.is_valid():
                 entry = serializer.save(user=request.user)
-                return Response(KindActSerializer(entry).data)
+                return Response(AchievementSerializer(entry).data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"detail": "You do not have permission to update this entry."}, status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request):
         ids = request.data.get('ids', None)
-        entries = KindAct.objects.filter(id__in=ids)
+        entries = Achievement.objects.filter(id__in=ids)
 
         # Check if the user is an admin or only owns the entries they are trying to delete
         if request.user.is_superuser:

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from kind_app.models.kind_act import KindAct
+from kind_app.models.achievement import Achievement
 from kind_app.models.kudos import Kudos
 from kind_app.models.satisfaction import Satisfaction
 
@@ -17,11 +17,11 @@ class KudosSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'content', 'created_at', 'updated_at']
         read_only_fields = ['id', 'user', 'created_at', 'updated_at']
 
-class KindActSerializer(serializers.ModelSerializer):
+class AchievementSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)  # Include username in the response
 
     class Meta:
-        model = KindAct
+        model = Achievement
         fields = ['id', 'user', 'content', 'created_at', 'updated_at']
         read_only_fields = ['id', 'user', 'created_at', 'updated_at']
 

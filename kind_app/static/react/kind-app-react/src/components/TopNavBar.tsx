@@ -36,7 +36,7 @@ export default function TopNavBar() {
           <Divider orientation='vertical' variant="middle" flexItem />
           <Button color='inherit' href={"/satisfaction/"}>Satisfaction</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
-          <Button color='inherit' href={"/kind-acts/"}>Kind Acts</Button>
+          <Button color='inherit' href={"/achievements/"}>Achievements</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
 
           <Box

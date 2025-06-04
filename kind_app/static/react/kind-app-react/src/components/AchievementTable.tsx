@@ -15,28 +15,28 @@ import {
 } from '@mui/material';
 import AddButton from './AddButton';
 import ActionButton from './ActionButton';
-import GratitudeEntryForm from './KudosEntryForm';
+import KudosEntryForm from './KudosEntryForm';
 import { useAuth } from '../context/AuthContext';
 
-interface KindAct {
+interface Achievement {
   id: number
   content: string;
   created_at: string;
 }
 
-const KindActTable: React.FC = () => {
+const AchievementTable: React.FC = () => {
   const { csrfToken } = useAuth(); // Use the CSRF token from context
-  const [entries, setEntries] = useState<KindAct[]>([]);
+  const [entries, setEntries] = useState<Achievement[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
-  const [editingEntry, setEditingEntry] = useState<KindAct | null>(null); // To track which entry is being edited
+  const [editingEntry, setEditingEntry] = useState<Achievement | null>(null); // To track which entry is being edited
 
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const response = await fetch('/api/kind-acts/');
+        const response = await fetch('/api/achievements/');
         if (!response.ok) {
           throw new Error('Failed to fetch entries. You are not logged in. Please log in to make changes!');
         }
@@ -64,7 +64,7 @@ const KindActTable: React.FC = () => {
     try {
       if (editingEntry) {
         // Update existing entry (Edit case)
-        const response = await fetch(`/api/kind-acts/`, {
+        const response = await fetch(`/api/achievements/`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const KindActTable: React.FC = () => {
         );
       } else {
         // Add new entry (Add case)
-        const response = await fetch('/api/kind-acts/', {
+        const response = await fetch('/api/achievements/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ const KindActTable: React.FC = () => {
 
   const handleDeleteEntry = async (id: number) => {
     try {
-      const response = await fetch(`/api/kind-acts/`, {
+      const response = await fetch(`/api/achievements/`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -189,7 +189,7 @@ const KindActTable: React.FC = () => {
     <Container>
       <Box mb={2} display="flex" alignItems="center" justifyContent="space-between">
         <Typography variant="h4" gutterBottom>
-          Acts of Kindness
+          Achievements
         </Typography>
         <Box display="flex" alignItems="center">
             <AddButton onClick={handleAddClick} />
@@ -241,7 +241,7 @@ const KindActTable: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <GratitudeEntryForm
+      <KudosEntryForm
         open={showForm}
         onClose={handleFormClose}
         onSubmit={handleFormSubmit}
@@ -250,4 +250,4 @@ const KindActTable: React.FC = () => {
   );
 };
 
-export default KindActTable;
+export default AchievementTable;

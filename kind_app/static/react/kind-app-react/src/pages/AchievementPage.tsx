@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Typography, Box, Paper } from '@mui/material';
-import KindActTable from '../components/KindActTable';  // Import the table component
+import KindActTable from '../components/AchievementTable';  // Import the table component
 import InfoCard from '../components/InfoCard';
 
-const KindActPage: React.FC = () => {
+const AchievementPage: React.FC = () => {
   return (
     <Container maxWidth="lg"> {/* Sets the max width of the container */}
       <Box mt={4} mb={4} display="flex" alignItems="flex-start"> {/* Adds vertical margin */}
@@ -16,8 +16,8 @@ const KindActPage: React.FC = () => {
         </Box>
         <Box width={300}> {/* Adds margin below the InfoCard */}
           <InfoCard 
-            title="Acts of Kindness" 
-            content="What can you do for someone in your life that will take a load off their shoulders?" 
+            title="Achievements" 
+            content="What is something you achieved that you're proud of? Celebrating small wins is key to improving our mental health. " 
           />
         </Box>
       </Box>
@@ -25,4 +25,4 @@ const KindActPage: React.FC = () => {
   );
 };
 
-export default KindActPage;
+export default AchievementPage;

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from kind_app.models.kind_act import KindAct
+from kind_app.models.achievement import Achievement
 from kind_app.models.kudos import Kudos
 from kind_app.models.satisfaction import Satisfaction
 
@@ -7,8 +7,8 @@ from kind_app.models.satisfaction import Satisfaction
 class KudosAdmin(admin.ModelAdmin):
     list_display = ("id", "user_id", "content", "created_at", "updated_at")
 
-@admin.register(KindAct)
-class KindActAdmin(admin.ModelAdmin):
+@admin.register(Achievement)
+class AchievementAdmin(admin.ModelAdmin):
     list_display = ("id", "user_id", "content", "created_at", "updated_at")
 
 @admin.register(Satisfaction)

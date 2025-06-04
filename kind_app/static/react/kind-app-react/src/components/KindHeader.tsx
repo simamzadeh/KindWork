@@ -7,7 +7,7 @@ const Header: React.FC = () => {
     return (
         <Box sx={{ width: '100%', maxWidth: 600 }}>
             <Typography variant="h2" gutterBottom>
-                Welcome to Kind.
+                Welcome to KindWork.
             </Typography>
         </Box>
     );

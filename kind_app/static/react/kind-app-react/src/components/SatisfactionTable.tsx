@@ -25,11 +25,11 @@ interface SatisfactionLog {
 }
 
 const satisfactionLabelMap: { [key: string]: string } = {
-    'very unpleasant': 'Very Unhappy',
-    'unpleasant': 'Unhappy',
+    'very unhappy': 'Very Unhappy',
+    'unhappy': 'Unhappy',
     'neutral': 'Neutral',
-    'pleasant': 'Content',
-    'very pleasant': 'Very Content',
+    'content': 'Content',
+    'very content': 'Very Content',
 };
 
 const SatisfactionTable: React.FC = () => {
