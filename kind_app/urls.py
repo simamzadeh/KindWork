@@ -1,6 +1,7 @@
 from django.urls import path
 from django.urls import path
 from kind_app.views.achievement import AchievementView
+from kind_app.views.highlight import HighlightView
 from kind_app.views.kudos import KudosView
 from kind_app.views.satisfaction import SatisfactionView
 from kind_app.views.utils import index
@@ -18,5 +19,6 @@ urlpatterns = [
     path('api/check-auth/', check_authentication, name='check-auth'),
     path('api/kudos/', KudosView.as_view(), name='kudos-api'),
     path('api/achievements/', AchievementView.as_view(), name="achievements-api"),
+    path('api/highlights/', HighlightView.as_view(), name="highlight-api"),
     path('api/satisfaction/', SatisfactionView.as_view(), name="satisfaction-api")
 ]

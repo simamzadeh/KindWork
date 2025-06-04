@@ -38,6 +38,8 @@ export default function TopNavBar() {
           <Divider orientation='vertical' variant="middle" flexItem />
           <Button color='inherit' href={"/achievements/"}>Achievements</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
+          <Button color='inherit' href={"/highlights/"}>Highlights</Button>
+          <Divider orientation='vertical' variant="middle" flexItem />
 
           <Box
             sx={{

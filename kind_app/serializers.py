@@ -3,6 +3,7 @@ from rest_framework import serializers
 from kind_app.models.achievement import Achievement
 from kind_app.models.kudos import Kudos
 from kind_app.models.satisfaction import Satisfaction
+from kind_app.models.highlight import Highlight
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,6 +23,14 @@ class AchievementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Achievement
+        fields = ['id', 'user', 'content', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'user', 'created_at', 'updated_at']
+
+class HighlightSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)  # Include username in the response
+
+    class Meta:
+        model = Highlight
         fields = ['id', 'user', 'content', 'created_at', 'updated_at']
         read_only_fields = ['id', 'user', 'created_at', 'updated_at']
 

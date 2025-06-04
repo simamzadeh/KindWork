@@ -1,23 +1,23 @@
 import React from 'react';
 import { Container, Typography, Box, Paper } from '@mui/material';
-import AchievementTable from '../components/AchievementTable';  // Import the table component
+import HighlightTable from '../components/HighlightTable';  // Import the table component
 import InfoCard from '../components/InfoCard';
 
-const AchievementPage: React.FC = () => {
+const HighlightPage: React.FC = () => {
   return (
     <Container maxWidth="lg"> {/* Sets the max width of the container */}
       <Box mt={4} mb={4} display="flex" alignItems="flex-start"> {/* Adds vertical margin */}
         <Box flex={1} mr={1}>
           <Paper elevation={3}> {/* Adds a shadowed paper effect to the table */}
             <Box p={2}> {/* Adds padding around the table */}
-              <AchievementTable />  {/* Render the achievements table here */}
+              <HighlightTable />  {/* Render the highlight table here */}
             </Box>
           </Paper>
         </Box>
         <Box width={300}> {/* Adds margin below the InfoCard */}
           <InfoCard 
             title="Achievements" 
-            content="What is something you achieved that you're proud of? Celebrating small wins is key to improving our mental health. " 
+            content="Reflect on some highlights from the past week." 
           />
         </Box>
       </Box>
@@ -25,4 +25,4 @@ const AchievementPage: React.FC = () => {
   );
 };
 
-export default AchievementPage;
+export default HighlightPage;
