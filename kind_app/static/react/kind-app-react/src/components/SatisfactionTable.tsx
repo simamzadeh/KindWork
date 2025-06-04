@@ -44,7 +44,7 @@ const SatisfactionTable: React.FC = () => {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const response = await fetch('/api/satifaction-log/');
+        const response = await fetch('/api/satisfaction/');
         if (!response.ok) {
           throw new Error('Failed to fetch entries. You are not logged in. Please log in to make changes!');
         }
