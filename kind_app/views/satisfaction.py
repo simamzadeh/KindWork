@@ -4,20 +4,20 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
-from kind_app.models.mood_log import MoodLog
-from kind_app.serializers import MoodLogSerializer
+from kind_app.models.satisfaction import Satisfaction
+from kind_app.serializers import SatisfactionSerializer
 
-class MoodLogView(APIView):
+class SatisfactionView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, pk=None):
         # If a specific entry is requested
         if pk:
-            entry = get_object_or_404(MoodLog, pk=pk)
+            entry = get_object_or_404(Satisfaction, pk=pk)
 
             # Check if the user is the owner of the entry or an admin
             if request.user.is_superuser or entry.user == request.user:
-                serializer = MoodLogSerializer(entry)
+                serializer = SatisfactionSerializer(entry)
                 return Response(serializer.data)
             else:
                 return Response({"detail": "You do not have permission to view this entry."}, status=status.HTTP_403_FORBIDDEN)
@@ -25,12 +25,12 @@ class MoodLogView(APIView):
         # If all entries are requested
         if request.user.is_superuser:
             # Admin can see all entries
-            entries = MoodLog.objects.all()
+            entries = Satisfaction.objects.all()
         else:
             # Regular users can only see their own entries
-            entries = MoodLog.objects.filter(user=request.user)
+            entries = Satisfaction.objects.filter(user=request.user)
         
-        serializer = MoodLogSerializer(entries, many=True)
+        serializer = SatisfactionSerializer(entries, many=True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -38,29 +38,29 @@ class MoodLogView(APIView):
         data = request.data.copy()  # Make a mutable copy of the request data
         data['user'] = request.user.id  # Set the user field to the currently authenticated user
 
-        serializer = MoodLogSerializer(data=data)
+        serializer = SatisfactionSerializer(data=data)
         if serializer.is_valid():
             entry = serializer.save(user=request.user)
-            return Response(MoodLogSerializer(entry).data, status=status.HTTP_201_CREATED)
+            return Response(SatisfactionSerializer(entry).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
         entry_id = request.data.get('id', None)
-        entry = get_object_or_404(MoodLog, pk=entry_id)
+        entry = get_object_or_404(Satisfaction, pk=entry_id)
 
         # Check if the user is the owner of the entry or an admin
         if request.user.is_superuser or entry.user == request.user:
-            serializer = MoodLogSerializer(entry, data=request.data, partial=True)
+            serializer = SatisfactionSerializer(entry, data=request.data, partial=True)
             if serializer.is_valid():
                 entry = serializer.save(user=request.user)
-                return Response(MoodLogSerializer(entry).data)
+                return Response(SatisfactionSerializer(entry).data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"detail": "You do not have permission to update this entry."}, status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request):
         ids = request.data.get('ids', None)
-        entries = MoodLog.objects.filter(id__in=ids)
+        entries = Satisfaction.objects.filter(id__in=ids)
 
         # Check if the user is an admin or only owns the entries they are trying to delete
         if request.user.is_superuser:

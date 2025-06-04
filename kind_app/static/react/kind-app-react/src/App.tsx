@@ -2,7 +2,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './App.css';
 import TopNavBar from './components/TopNavBar';
 import { AuthProvider } from './context/AuthContext';
-import QuestionButtonCard from './components/QuestionButtonCard'
 import { RouterProvider } from 'react-router-dom';
 import Router from './Router';
 

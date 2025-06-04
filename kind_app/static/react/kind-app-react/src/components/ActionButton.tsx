@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Menu, MenuItem, IconButton } from '@mui/material';
+import { Button, Menu, MenuItem } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 
@@ -19,16 +19,6 @@ const ActionButton: React.FC<ActionButtonProps> = ({ onEdit, onDelete, disableEd
 
   const handleClose = () => {
     setAnchorElement(null);
-  };
-
-  const handleEdit = () => {
-    onEdit();
-    handleClose();
-  };
-
-  const handleDelete = () => {
-    onDelete();
-    handleClose();
   };
 
   return (

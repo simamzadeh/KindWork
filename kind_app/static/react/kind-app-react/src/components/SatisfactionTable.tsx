@@ -15,16 +15,16 @@ import {
 } from '@mui/material';
 import AddButton from './AddButton';
 import ActionButton from './ActionButton';
-import MoodLogForm from './MoodLogForm';
+import SatisfactionForm from './SatisfactionForm';
 import { useAuth } from '../context/AuthContext';
 
-interface MoodLog {
+interface SatifactionLog {
   id: number
-  mood: string;
+  satisfaction: string;
   created_at: string;
 }
 
-const moodLabelMap: { [key: string]: string } = {
+const satisfactionLabelMap: { [key: string]: string } = {
     'very unpleasant': 'Very Unpleasant',
     'unpleasant': 'Unpleasant',
     'neutral': 'Neutral',
@@ -32,19 +32,19 @@ const moodLabelMap: { [key: string]: string } = {
     'very pleasant': 'Very Pleasant',
 };
 
-const MoodLogTable: React.FC = () => {
+const SatisfactionTable: React.FC = () => {
   const { csrfToken } = useAuth(); // Use the CSRF token from context
-  const [entries, setEntries] = useState<MoodLog[]>([]);
+  const [entries, setEntries] = useState<SatifactionLog[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
-  const [editingEntry, setEditingEntry] = useState<MoodLog | null>(null); // To track which entry is being edited
+  const [editingEntry, setEditingEntry] = useState<SatifactionLog | null>(null); // To track which entry is being edited
 
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const response = await fetch('/api/mood-log/');
+        const response = await fetch('/api/satifaction-log/');
         if (!response.ok) {
           throw new Error('Failed to fetch entries. You are not logged in. Please log in to make changes!');
         }
@@ -68,11 +68,11 @@ const MoodLogTable: React.FC = () => {
     setShowForm(false);
   };
 
-  const handleFormSubmit = async (mood: string) => {
+  const handleFormSubmit = async (satisfaction: string) => {
     try {
       if (editingEntry) {
         // Update existing entry (Edit case)
-        const response = await fetch(`/api/mood-log/`, {
+        const response = await fetch(`/api/satisfaction-log/`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const MoodLogTable: React.FC = () => {
           },
           body: JSON.stringify({ 
             id: editingEntry.id,
-            mood, 
+            satisfaction, 
           }),
         });
 
@@ -96,14 +96,13 @@ const MoodLogTable: React.FC = () => {
         );
       } else {
         // Add new entry (Add case)
-        const selectedMood = mood.toLowerCase().replace(/\s/g, ''); // Format mood to match the backend
-        const response = await fetch('/api/mood-log/', {
+        const response = await fetch('/api/satisfaction-log/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrfToken || '',
           },
-          body: JSON.stringify({ mood }),
+          body: JSON.stringify({ satisfaction }),
         });
 
         if (!response.ok) {
@@ -122,7 +121,7 @@ const MoodLogTable: React.FC = () => {
 
   const handleDeleteEntry = async (id: number) => {
     try {
-      const response = await fetch(`/api/mood-log/`, {
+      const response = await fetch(`/api/satisfaction-log/`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -198,7 +197,7 @@ const MoodLogTable: React.FC = () => {
     <Container>
       <Box mb={2} display="flex" alignItems="center" justifyContent="space-between">
         <Typography variant="h4" gutterBottom>
-          Mood Log
+          Satifaction Log
         </Typography>
         <Box display="flex" alignItems="center">
             <AddButton onClick={handleAddClick} />
@@ -223,7 +222,7 @@ const MoodLogTable: React.FC = () => {
                   onChange={handleSelectAllClick}
                 />
               </TableCell>
-              <TableCell>Mood</TableCell>
+              <TableCell>Satifaction</TableCell>
               <TableCell>Created At</TableCell>
             </TableRow>
           </TableHead>
@@ -241,7 +240,7 @@ const MoodLogTable: React.FC = () => {
                     onChange={() => handleRowClick(entry.id)}
                   />
                 </TableCell>
-                <TableCell>{moodLabelMap[entry.mood] || entry.mood}</TableCell>
+                <TableCell>{satisfactionLabelMap[entry.satisfaction] || entry.satisfaction}</TableCell>
                 <TableCell>
                   {new Date(entry.created_at).toLocaleString()}
                 </TableCell>
@@ -250,7 +249,7 @@ const MoodLogTable: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <MoodLogForm
+      <SatisfactionForm
         open={showForm}
         onClose={handleFormClose}
         onSubmit={handleFormSubmit}
@@ -259,4 +258,4 @@ const MoodLogTable: React.FC = () => {
   );
 };
 
-export default MoodLogTable;
+export default SatisfactionTable;

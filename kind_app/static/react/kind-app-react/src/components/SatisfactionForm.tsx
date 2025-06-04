@@ -1,58 +1,58 @@
 import React, { useState } from 'react';
 import { Box, Typography, Slider, Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
-interface MoodLogFormProps {
+interface SatisfactionFormProps {
     open: boolean;
     onClose: () => void;
-    onSubmit: (mood: string) => void;  // Ensure the mood string is passed correctly
+    onSubmit: (satisfaction: string) => void;  // Ensure the satisfaction string is passed correctly
 }
 
-// Define the mood labels
-const moodMarks = [
-  { value: 0, label: 'Very Unpleasant' },
-  { value: 25, label: 'Unpleasant' },
+// Define the satisfaction labels
+const satisfactionMarks = [
+  { value: 0, label: 'Very Unhappy' },
+  { value: 25, label: 'Unhappy' },
   { value: 50, label: 'Neutral' },
-  { value: 75, label: 'Pleasant' },
-  { value: 100, label: 'Very Pleasant' },
+  { value: 75, label: 'Content' },
+  { value: 100, label: 'Very Content' },
 ];
 
 // Create a map to convert label to backend-accepted lowercase values
-const moodMap: { [key in typeof moodMarks[number]['label']]: string } = {
-  'Very Unpleasant': 'very unpleasant',
-  'Unpleasant': 'unpleasant',
+const satisfactionMap: { [key in typeof satisfactionMarks[number]['label']]: string } = {
+  'Very Unhappy': 'very unhappy',
+  'Unhappy': 'unhappy',
   'Neutral': 'neutral',
-  'Pleasant': 'pleasant',
-  'Very Pleasant': 'very pleasant',
+  'Content': 'content',
+  'Very Content': 'very content',
 };
 
-const MoodLogForm: React.FC<MoodLogFormProps> = ({ open, onClose, onSubmit }) => {
-  const [mood, setMood] = useState<number>(50);  // Default to Neutral (50)
+const SatisfactionForm: React.FC<SatisfactionFormProps> = ({ open, onClose, onSubmit }) => {
+  const [satisfaction, setSatisfaction] = useState<number>(50);  // Default to Neutral (50)
 
-  // Handle the change of the mood slider
-  const handleMoodChange = (_: Event, newValue: number | number[]) => {
-    setMood(newValue as number);  // Treat newValue as a number
+  // Handle the change of the satisfaction slider
+  const handleSatisfactionChange = (_: Event, newValue: number | number[]) => {
+    setSatisfaction(newValue as number);  // Treat newValue as a number
   };
 
   // Handle the form submission
   const handleSubmit = () => {
-    const selectedMoodLabel = moodMarks.find((mark) => mark.value === mood)?.label || 'Neutral';  // Find the label
-    const selectedMood = moodMap[selectedMoodLabel];  // Map the label to the backend format
-    onSubmit(selectedMood);  // Submit the selected mood in the backend-accepted format
-    console.log("Submitted mood:", selectedMood);  // Log the submitted mood
+    const selectedSatisfactionLabel = satisfactionMarks.find((mark) => mark.value === satisfaction)?.label || 'Neutral';  // Find the label
+    const selectedSatisfaction = satisfactionMap[selectedSatisfactionLabel];  // Map the label to the backend format
+    onSubmit(selectedSatisfaction);  // Submit the selected satisfaction in the backend-accepted format
+    console.log("Submitted satisfaction:", selectedSatisfaction);  // Log the submitted satisfaction
   };
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>Log Your Mood</DialogTitle>
+      <DialogTitle>Log Your Daily Satisfaction</DialogTitle>
       <DialogContent sx={{ width: '100%', maxWidth: '600px', mx: 'auto', paddingLeft: '24px', paddingRight: '24px'}}>
         <Box sx={{ width: '100%', padding: '24px'}}>
-          <Typography gutterBottom >Your Current Mood</Typography>
+          <Typography gutterBottom >Your Current Satisfaction</Typography>
 
           <Slider
-            value={mood}
-            onChange={handleMoodChange}
+            value={satisfaction}
+            onChange={handleSatisfactionChange}
             step={25}
-            marks={moodMarks}
+            marks={satisfactionMarks}
             min={0}
             max={100}
             sx={{
@@ -71,11 +71,11 @@ const MoodLogForm: React.FC<MoodLogFormProps> = ({ open, onClose, onSubmit }) =>
                 '& .MuiSlider-mark': {
                   transform: 'translateX(-50%)',  // Adjust positioning of the marks
                 },
-                '& .MuiSlider-markLabel[data-index="0"]': {  // First label (Very Unpleasant)
+                '& .MuiSlider-markLabel[data-index="0"]': {  // First label (Very Unhappy)
                   transform: 'translateX(0%)',  // Ensure it's fully visible
                   marginLeft: '-12px',  // Add some left margin to make space
                 },
-                '& .MuiSlider-markLabel[data-index="4"]': {  // Last label (Very Pleasant)
+                '& .MuiSlider-markLabel[data-index="4"]': {  // Last label (Very Content)
                   transform: 'translateX(-100%)',  // Ensure it's fully visible
                   marginRight: '-12px',  // Add some right margin to make space
                 },
@@ -95,4 +95,4 @@ const MoodLogForm: React.FC<MoodLogFormProps> = ({ open, onClose, onSubmit }) =>
   );
 };
 
-export default MoodLogForm;
+export default SatisfactionForm;

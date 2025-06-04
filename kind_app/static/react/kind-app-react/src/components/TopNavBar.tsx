@@ -1,10 +1,8 @@
-import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
   Box,
   Toolbar,
   Button,
-  IconButton,
   Divider,
   Typography
 } from "@mui/material";
