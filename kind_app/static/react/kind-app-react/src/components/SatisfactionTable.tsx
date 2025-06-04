@@ -18,7 +18,7 @@ import ActionButton from './ActionButton';
 import SatisfactionForm from './SatisfactionForm';
 import { useAuth } from '../context/AuthContext';
 
-interface SatifactionLog {
+interface SatisfactionLog {
   id: number
   satisfaction: string;
   created_at: string;
@@ -34,12 +34,12 @@ const satisfactionLabelMap: { [key: string]: string } = {
 
 const SatisfactionTable: React.FC = () => {
   const { csrfToken } = useAuth(); // Use the CSRF token from context
-  const [entries, setEntries] = useState<SatifactionLog[]>([]);
+  const [entries, setEntries] = useState<SatisfactionLog[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
-  const [editingEntry, setEditingEntry] = useState<SatifactionLog | null>(null); // To track which entry is being edited
+  const [editingEntry, setEditingEntry] = useState<SatisfactionLog | null>(null); // To track which entry is being edited
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -197,7 +197,7 @@ const SatisfactionTable: React.FC = () => {
     <Container>
       <Box mb={2} display="flex" alignItems="center" justifyContent="space-between">
         <Typography variant="h4" gutterBottom>
-          Satifaction Log
+          Satisfaction Log
         </Typography>
         <Box display="flex" alignItems="center">
             <AddButton onClick={handleAddClick} />
@@ -222,7 +222,7 @@ const SatisfactionTable: React.FC = () => {
                   onChange={handleSelectAllClick}
                 />
               </TableCell>
-              <TableCell>Satifaction</TableCell>
+              <TableCell>Satisfaction</TableCell>
               <TableCell>Created At</TableCell>
             </TableRow>
           </TableHead>
