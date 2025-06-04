@@ -15,28 +15,28 @@ import {
 } from '@mui/material';
 import AddButton from './AddButton';
 import ActionButton from './ActionButton';
-import GratitudeEntryForm from './GratitudeEntryForm';
+import GratitudeEntryForm from './KudosEntryForm';
 import { useAuth } from '../context/AuthContext';
 
-interface GratitudeEntry {
+interface KudosEntry {
   id: number;
   content: string;
   created_at: string;
 }
 
-const GratitudeEntryTable: React.FC = () => {
+const KudosEntryTable: React.FC = () => {
   const { csrfToken } = useAuth(); // Use the CSRF token from context
-  const [entries, setEntries] = useState<GratitudeEntry[]>([]);
+  const [entries, setEntries] = useState<KudosEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
-  const [editingEntry, setEditingEntry] = useState<GratitudeEntry | null>(null); // To track which entry is being edited
+  const [editingEntry, setEditingEntry] = useState<KudosEntry | null>(null); // To track which entry is being edited
 
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const response = await fetch('/api/gratitude/');
+        const response = await fetch('/api/kudos/');
         if (!response.ok) {
           throw new Error('Failed to fetch entries. You are not logged in. Please log in to make changes!');
         }
@@ -64,7 +64,7 @@ const GratitudeEntryTable: React.FC = () => {
     try {
       if (editingEntry) {
         // Update existing entry (Edit case)
-        const response = await fetch(`/api/gratitude/`, {
+        const response = await fetch(`/api/kudos/`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const GratitudeEntryTable: React.FC = () => {
         );
       } else {
         // Add new entry (Add case)
-        const response = await fetch('/api/gratitude/', {
+        const response = await fetch('/api/kudos/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ const GratitudeEntryTable: React.FC = () => {
 
   const handleDeleteEntry = async (id: number) => {
     try {
-      const response = await fetch(`/api/gratitude/`, {
+      const response = await fetch(`/api/kudos/`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -189,7 +189,7 @@ const GratitudeEntryTable: React.FC = () => {
     <Container>
       <Box mb={2} display="flex" alignItems="center" justifyContent="space-between">
         <Typography variant="h4" gutterBottom>
-          Gratitude Entries
+          Kudos Entries
         </Typography>
         <Box display="flex" alignItems="center">
             <AddButton onClick={handleAddClick} />
@@ -250,4 +250,4 @@ const GratitudeEntryTable: React.FC = () => {
   );
 };
 
-export default GratitudeEntryTable;
+export default KudosEntryTable;

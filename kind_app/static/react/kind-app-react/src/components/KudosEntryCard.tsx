@@ -9,14 +9,14 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-export interface GratitudeEntryCardProps {}
+export interface KudosEntryCardProps {}
 
-const GratitudeEntryCard: React.FC<GratitudeEntryCardProps> = () => {
+const KudosEntryCard: React.FC<KudosEntryCardProps> = () => {
   const [data, setData] = useState<any[]>([]); // add props in useState
   const {fetchWithTokens} = useApi();
 
   useEffect(() => {
-      fetchWithTokens("api/gratitude/", { 
+      fetchWithTokens("api/kudos/", { 
         method: 'GET', 
         })
         .then((response: any) => {
@@ -32,14 +32,14 @@ return (
   <React.Fragment>
     <CardContent>
       <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-        Gratitude Entry
+        Give Kudos
       </Typography>
       <Typography variant="h5" component="div">
-        What are you grateful for?
+        Who do you have to appreciate?
       </Typography>
       <TextField
             id="outlined-basic"
-            placeholder="I am grateful for..."
+            placeholder="I give kudos to..."
             multiline
             minRows={5}
             maxRows={5}
@@ -57,7 +57,7 @@ return (
             ))
           ) : (
             <Typography variant="body2" sx={{ color: 'text.secondary', marginTop: 2 }}>
-              No gratitude entries found.
+              No kudos entries found.
             </Typography>
           )}
         </List>
@@ -72,7 +72,7 @@ export default function OutlinedCard() {
     <Box sx={{ 
       minWidth: 275, 
     }}>
-      <Card variant="outlined">{<GratitudeEntryCard/>}</Card>
+      <Card variant="outlined">{<KudosEntryCard/>}</Card>
     </Box>
   );
 }

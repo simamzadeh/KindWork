@@ -8,7 +8,7 @@ class Satisfaction(models.Model):
         ('neutral', 'Neutral'),
         ('unhappy', 'Unhappy'),
         ('very unhappy', 'Very Unhappy'),
-        # Add more mood options here
+        # Add more satisfaction options here
     ]
 
     id = models.AutoField(primary_key=True)

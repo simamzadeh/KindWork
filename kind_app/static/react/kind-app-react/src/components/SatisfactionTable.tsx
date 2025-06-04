@@ -25,11 +25,11 @@ interface SatifactionLog {
 }
 
 const satisfactionLabelMap: { [key: string]: string } = {
-    'very unpleasant': 'Very Unpleasant',
-    'unpleasant': 'Unpleasant',
+    'very unpleasant': 'Very Unhappy',
+    'unpleasant': 'Unhappy',
     'neutral': 'Neutral',
-    'pleasant': 'Pleasant',
-    'very pleasant': 'Very Pleasant',
+    'pleasant': 'Content',
+    'very pleasant': 'Very Content',
 };
 
 const SatisfactionTable: React.FC = () => {
@@ -72,7 +72,7 @@ const SatisfactionTable: React.FC = () => {
     try {
       if (editingEntry) {
         // Update existing entry (Edit case)
-        const response = await fetch(`/api/satisfaction-log/`, {
+        const response = await fetch(`/api/satisfaction/`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ const SatisfactionTable: React.FC = () => {
         );
       } else {
         // Add new entry (Add case)
-        const response = await fetch('/api/satisfaction-log/', {
+        const response = await fetch('/api/satisfaction/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const SatisfactionTable: React.FC = () => {
 
   const handleDeleteEntry = async (id: number) => {
     try {
-      const response = await fetch(`/api/satisfaction-log/`, {
+      const response = await fetch(`/api/satisfaction/`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

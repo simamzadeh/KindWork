@@ -32,7 +32,7 @@ export default function TopNavBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: '#657d6a' }}>
         <Toolbar>
-          <Button color='inherit' href={"/gratitude/"}>Gratitude</Button>
+          <Button color='inherit' href={"/kudos/"}>Give Kudos</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
           <Button color='inherit' href={"/satisfaction/"}>Satisfaction</Button>
           <Divider orientation='vertical' variant="middle" flexItem />
@@ -50,7 +50,7 @@ export default function TopNavBar() {
             }}
           >
             <Typography variant="h6" sx={{ color: 'inherit' }}>
-              {isLoggedIn ? `Welcome to Kind, ${username}` : 'Welcome to Kind'}
+              {isLoggedIn ? `Welcome to KindWork, ${username}` : 'Welcome to KindWork'}
             </Typography>
           </Box>
 

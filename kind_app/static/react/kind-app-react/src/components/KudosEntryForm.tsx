@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
 
-interface GratitudeEntryFormProps {
+interface KudosEntryFormProps {
   open: boolean;
   onClose: () => void;
   onSubmit: (content: string) => void;
 }
 
-const GratitudeEntryForm: React.FC<GratitudeEntryFormProps> = ({ open, onClose, onSubmit }) => {
+const KudosEntryForm: React.FC<KudosEntryFormProps> = ({ open, onClose, onSubmit }) => {
   const [content, setContent] = useState<string>('');
 
   const handleSubmit = () => {
@@ -42,4 +42,4 @@ const GratitudeEntryForm: React.FC<GratitudeEntryFormProps> = ({ open, onClose, 
   );
 };
 
-export default GratitudeEntryForm;
+export default KudosEntryForm;

@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import AddButton from './AddButton';
 import ActionButton from './ActionButton';
-import GratitudeEntryForm from './GratitudeEntryForm';
+import GratitudeEntryForm from './KudosEntryForm';
 import { useAuth } from '../context/AuthContext';
 
 interface KindAct {
