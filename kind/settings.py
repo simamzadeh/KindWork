@@ -19,7 +19,8 @@ environ.Env.read_env()
 DOMAIN = os.environ.get("DOMAIN", "http://localhost:8000") # where app runs locally
 # SECRET_KEY = os.environ.get("SECRET_KEY")
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get("DEBUG", "True") == "True"
+# DEBUG = os.environ.get("DEBUG", "True") == "True"
+DEBUG = False
 CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", "False") == "True"
 SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", "False") == "True"
 SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", "False") == "True"
