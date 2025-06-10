@@ -7,7 +7,7 @@ import HighlightPage from './pages/HighlightPage';
 // Login, logout and registration pages are not included in the Router as they use Bootstrap instead
 const Router = createBrowserRouter([
     {
-        path: "/",
+        path: "",
         element: <KudosPage />
     },
     {

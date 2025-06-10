@@ -17,7 +17,6 @@ import environ
 # Environment variables
 environ.Env.read_env()
 DOMAIN = os.environ.get("DOMAIN", "http://localhost:8000") # where app runs locally
-# SECRET_KEY = os.environ.get("SECRET_KEY")
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # DEBUG = os.environ.get("DEBUG", "True") == "True"
 DEBUG = True
