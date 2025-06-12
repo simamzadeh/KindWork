@@ -8,6 +8,13 @@ echo "Installing requirements..."
 pip install -r requirements.txt
 
 echo "===================================="
+echo "Building React application..."
+cd kind_app/static/react/kind-app-react
+npm install
+npm run build
+cd ../../../..
+
+echo "===================================="
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 

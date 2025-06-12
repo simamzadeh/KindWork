@@ -16,7 +16,7 @@ const HighlightPage: React.FC = () => {
         </Box>
         <Box width={300}> {/* Adds margin below the InfoCard */}
           <InfoCard 
-            title="Weekly Highlights" 
+            title="Weekly Highlights - THE SCRIPT WORKS" 
             content="Reflect on some highlights from the past week." 
           />
         </Box>
