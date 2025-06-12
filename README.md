@@ -80,4 +80,4 @@ and
 
 Render automatically registers new git commits and starts deploying them immediately.
 
-Live URL here: https://kindapp.onrender.com/ 
+Live URL here: https://kindwork.onrender.com/ 
