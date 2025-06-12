@@ -1,5 +1,5 @@
-# KindApp
-Python web-based application, created for a university assignment. This application promotes being kind to ourselves and to those around us.
+# KindWork
+Python web-based application, created for a university assignment. This application promotes being kind and positive with ourselves and to those around us.
 
 ## Prerequistes
 
@@ -16,7 +16,7 @@ The recommended IDE for running this programme is Visual Studio Code. Please mak
 
 1. Close the repository from git using:
 
-`git clone https://github.com/simamzadeh/KindApp.git'
+`git clone https://github.com/simamzadeh/KindWork.git'
 
 2. Create a virtual environment by running
 
