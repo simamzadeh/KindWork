@@ -16,4 +16,8 @@ def logout_request(request):
     username = request.user.username if request.user.is_authenticated else "anonymous"
     logger.info(f"User '{username}' logged out")
     auth_logout(request)
-    return render(request, "logout.html")
+    response = render(request, "logout.html")
+    # Ensure cookies are properly invalidated
+    response.delete_cookie('sessionid')
+    response.delete_cookie('csrftoken')
+    return response
