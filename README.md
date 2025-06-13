@@ -81,3 +81,11 @@ and
 Render automatically registers new git commits and starts deploying them immediately.
 
 Live URL here: https://kindwork.onrender.com/ 
+
+# Local Testing
+
+1. Ensure any React frontend changes have been built using the `npm run build` command from the React project root (`kind_app_react`)
+
+2. From the Django root directory run `python manage.py runserver` to open the local development server.
+
+> Make sure you've commented out throttling in the settings.py file before opening the server!
