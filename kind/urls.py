@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("kind_app.urls")),
 
+    # This is a catch-all regex pattern that redirects to 404 page
     re_path(r"^(?:.*)/?$", TemplateView.as_view(template_name="index.html")),
 ]
