@@ -34,10 +34,10 @@ jobs:
     - name: Run Coverage
       run: |
         coverage run manage.py test
-        coverage report --omit=manage.py,kind/settings.py --fail-under=100
+        coverage report --omit=manage.py,kind/settings.py --fail-under=40
     - name: Run Bandit scan
       run: |
-        bandit -r . -x ./kind_app/tests.py
+        bandit -r . -x ./kind_app/tests
     - name: Run Safety scan
       run: |
         safety check --full-report

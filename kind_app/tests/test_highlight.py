@@ -53,6 +53,6 @@ class HighlightViewTestCase(TestCase):
     def test_highlight_DELETE_authenticated_user(self):
         self.client.login(username='testuser', password='password')
         highlight = Highlight.objects.create(user=self.user, content='Delete Me Content')
-        response = self.client.delete(self.kind_act_url, {'ids': [highlight.pk]}, content_type='application/json')
+        response = self.client.delete(self.highlight_url, {'ids': [highlight.pk]}, content_type='application/json')
         self.assertEqual(response.status_code, 204)  # Expecting no content response
         self.assertEqual(Highlight.objects.count(), 0)  # Assert the highlight has been deleted

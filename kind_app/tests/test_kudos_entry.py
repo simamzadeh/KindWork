@@ -27,7 +27,7 @@ class KudosDetailViewTestCase(APITestCase):
 
         # Check that only the authenticated user's entries are returned
         self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]['content'], "Kudos to Luke")
+        self.assertEqual(response.data[0]['content'], "Kudos to John")
 
     def test_get_kudos_entry_by_id(self):
         # Test GET request to retrieve a specific entry by filtering manually

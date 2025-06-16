@@ -53,6 +53,6 @@ class AchievementViewTestCase(TestCase):
     def test_achievement_DELETE_authenticated_user(self):
         self.client.login(username='testuser', password='password')
         achievement = Achievement.objects.create(user=self.user, content='Delete Me Content')
-        response = self.client.delete(self.kind_act_url, {'ids': [achievement.pk]}, content_type='application/json')
+        response = self.client.delete(self.achievement_url, {'ids': [achievement.pk]}, content_type='application/json')
         self.assertEqual(response.status_code, 204)  # Expecting no content response
         self.assertEqual(Achievement.objects.count(), 0)  # Assert the achievement has been deleted
