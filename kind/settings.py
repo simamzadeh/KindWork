@@ -17,7 +17,7 @@ import environ
 # Environment variables
 environ.Env.read_env()
 DOMAIN = os.environ.get("DOMAIN", "http://localhost:8000") # where app runs locally
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get("SECRET_KEY") 
 # Set DEBUG to True for local development, False for production (in Render)
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", "False") == "True"
