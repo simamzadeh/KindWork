@@ -218,8 +218,7 @@ SESSION_SAVE_EVERY_REQUEST = True
 
 # Authentication backends
 AUTHENTICATION_BACKENDS = [
-    # AxesStandaloneBackend should be the first backend
-    'axes.backends.AxesStandaloneBackend',
+    'axes.backends.AxesBackend',
     # Django ModelBackend is the default authentication backend
     'django.contrib.auth.backends.ModelBackend',
 ]
@@ -228,9 +227,10 @@ AUTHENTICATION_BACKENDS = [
 AXES_FAILURE_LIMIT = 5  # Number of login attempts before lockout
 AXES_COOLOFF_TIME = 1  # Lockout duration in hours
 AXES_RESET_ON_SUCCESS = True  # Reset failed attempts on successful login
-AXES_LOCKOUT_PARAMETERS = ['username', 'ip_address']  # Lock by both username and IP
 AXES_LOCKOUT_URL = '/locked/'  # URL to redirect to when locked out
 AXES_LOCKOUT_CALLABLE = 'kind_app.views.lockout.lockout'  # Custom lockout handler
+AXES_USERNAME_FORM_FIELD = 'username'  # Field that contains the username
+AXES_ONLY_USER_FAILURES = False  # Lock out based on username and IP
 
 # Password Validation
 AUTH_PASSWORD_VALIDATORS = [
