@@ -1,10 +1,12 @@
 from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
+from django.test import override_settings
 from django.contrib.auth.models import User
 from kind_app.models.kudos import Kudos
 
 
+@override_settings(AXES_ENABLED=False)
 class KudosDetailViewTestCase(APITestCase):
 
     def setUp(self):

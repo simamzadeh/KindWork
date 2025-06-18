@@ -224,6 +224,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Django Axes Configuration
+AXES_ENABLED = True  # Enable/disable axes (useful for testing)
 AXES_FAILURE_LIMIT = 5  # Number of login attempts before lockout
 AXES_COOLOFF_TIME = 1  # Lockout duration in hours
 AXES_RESET_ON_SUCCESS = True  # Reset failed attempts on successful login

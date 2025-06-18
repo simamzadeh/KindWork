@@ -1,8 +1,9 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.contrib.auth.models import User
 
 
+@override_settings(AXES_ENABLED=False)
 class LogoutViewTestCase(TestCase):
 
     def setUp(self):
