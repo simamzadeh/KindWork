@@ -20,9 +20,10 @@ DOMAIN = os.environ.get("DOMAIN", "http://localhost:8000") # where app runs loca
 SECRET_KEY = os.environ.get("SECRET_KEY") 
 # Set DEBUG to True for local development, False for production (in Render)
 DEBUG = os.environ.get("DEBUG", "True") == "True"
-CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", "False") == "True"
-SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", "False") == "True"
-SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", "False") == "True"
+# Secure cookie settings - set to True by default in production
+CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", str(not DEBUG)) == "True"
+SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", str(not DEBUG)) == "True"
+SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", str(not DEBUG)) == "True"
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(",")
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "kindapp.onrender.com", "kindwork.onrender.com"]
@@ -71,7 +72,7 @@ INSTALLED_APPS = [
     "corsheaders", # for making calls from backend to frontend
     "crispy_forms",
     'crispy_bootstrap4',
-
+    'axes',  # Django Axes for login attempt tracking and lockouts
 ]
 
 MIDDLEWARE = [
@@ -81,6 +82,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "axes.middleware.AxesMiddleware",  # Django Axes middleware (after AuthenticationMiddleware)
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -214,6 +216,44 @@ SESSION_COOKIE_AGE = 3600  # session timeout set to 1 hour
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_SAVE_EVERY_REQUEST = True
 
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    # AxesStandaloneBackend should be the first backend
+    'axes.backends.AxesStandaloneBackend',
+    # Django ModelBackend is the default authentication backend
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Django Axes Configuration
+AXES_FAILURE_LIMIT = 5  # Number of login attempts before lockout
+AXES_COOLOFF_TIME = 1  # Lockout duration in hours
+AXES_RESET_ON_SUCCESS = True  # Reset failed attempts on successful login
+AXES_LOCKOUT_PARAMETERS = ['username', 'ip_address']  # Lock by both username and IP
+AXES_LOCKOUT_URL = '/locked/'  # URL to redirect to when locked out
+AXES_LOCKOUT_CALLABLE = 'kind_app.views.lockout.lockout'  # Custom lockout handler
+
+# Password Validation
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+# Additional Security Headers
+SECURE_HSTS_SECONDS = 31536000  # 1 year (already set)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # (already set)
+SECURE_HSTS_PRELOAD = True  # (already set)
+SECURE_REFERRER_POLICY = 'same-origin'  # Added referrer policy
+
 # Logging Configuration
 LOGGING = {
     'version': 1,
@@ -244,6 +284,11 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
+        },
+        'axes': {  # Add axes logger
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
         },
     },
 }
