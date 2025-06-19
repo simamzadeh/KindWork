@@ -231,7 +231,7 @@ AXES_RESET_ON_SUCCESS = True  # Reset failed attempts on successful login
 AXES_LOCKOUT_URL = '/locked/'  # URL to redirect to when locked out
 AXES_LOCKOUT_CALLABLE = 'kind_app.views.lockout.lockout'  # Custom lockout handler
 AXES_USERNAME_FORM_FIELD = 'username'  # Field that contains the username
-AXES_ONLY_USER_FAILURES = False  # Lock out based on username and IP
+AXES_LOCKOUT_PARAMETERS = ['username', 'ip_address']  # Lock by both username and IP
 
 # Password Validation
 AUTH_PASSWORD_VALIDATORS = [
