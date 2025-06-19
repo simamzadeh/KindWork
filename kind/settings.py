@@ -87,6 +87,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "csp.middleware.CSPMiddleware",
+    "kind_app.middleware.ssrf_protection.SSRFProtectionMiddleware",  # SSRF protection middleware
 ]
 
 ROOT_URLCONF = 'kind.urls'
