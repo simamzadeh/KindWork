@@ -2,9 +2,11 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.contrib.auth.models import User
+from django.test import override_settings
 from kind_app.models.satisfaction import Satisfaction
 
 
+@override_settings(AXES_ENABLED=False)
 class SatisfactionViewTestCase(APITestCase):
 
     def setUp(self):
@@ -13,6 +15,7 @@ class SatisfactionViewTestCase(APITestCase):
         self.other_user = User.objects.create_user(username='otheruser', password='password')
         self.superuser = User.objects.create_superuser(username='admin', password='adminpassword')
 
+        # Use login to properly test authentication flow
         self.client.login(username='testuser', password='password')
 
         # Create sample satisfaction logs for both users

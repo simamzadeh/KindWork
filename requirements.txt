@@ -14,6 +14,7 @@ crispy-bootstrap4==2024.1
 cryptography==45.0.3
 distlib==0.3.8
 Django==4.2.21
+django-axes==6.3.0
 django-cors-headers==4.4.0
 django-crispy-forms==2.3
 django-csp==3.7

@@ -1,8 +1,9 @@
-from django.test import TestCase, Client
+from django.test import TestCase, Client, override_settings
 from django.contrib.auth.models import User
 from django.urls import reverse
 from kind_app.models.highlight import Highlight
 
+@override_settings(AXES_ENABLED=False)
 class HighlightViewTestCase(TestCase):
     def setUp(self):
         self.client = Client()

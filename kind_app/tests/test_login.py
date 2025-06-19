@@ -1,10 +1,12 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 
 
+# Disable axes for login tests
+@override_settings(AXES_ENABLED=False)
 class LoginViewTestCase(TestCase):
 
     def setUp(self):

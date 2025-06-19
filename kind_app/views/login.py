@@ -1,11 +1,16 @@
 import logging
-from django.shortcuts import  render, redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from axes.decorators import axes_dispatch
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
 
 logger = logging.getLogger('kind_app')
 
+@axes_dispatch
+@never_cache
 def login_request(request):
 	logger.info(f"Login page accessed. Method: {request.method}")
 	if request.method == "POST":
@@ -13,7 +18,8 @@ def login_request(request):
 		if form.is_valid():
 			username = form.cleaned_data.get('username')
 			password = form.cleaned_data.get('password')
-			user = authenticate(username=username, password=password)
+			# Pass the request to authenticate
+			user = authenticate(request=request, username=username, password=password)
 			if user is not None:
 				login(request, user)
 				logger.info(f"User '{username}' logged in successfully")
