@@ -18,7 +18,7 @@ const KudosEntryForm: React.FC<KudosEntryFormProps> = ({ open, onClose, onSubmit
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add Gratitude Entry</DialogTitle>
+      <DialogTitle>Add Entry</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
