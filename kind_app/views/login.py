@@ -10,7 +10,7 @@ from django.views.decorators.cache import never_cache
 logger = logging.getLogger('kind_app')
 
 @axes_dispatch
-@never_cache
+@never_cache # prevents caching of login page for security
 def login_request(request):
 	logger.info(f"Login page accessed. Method: {request.method}")
 	if request.method == "POST":
